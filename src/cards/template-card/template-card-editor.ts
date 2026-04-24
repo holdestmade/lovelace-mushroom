@@ -164,7 +164,7 @@ export class MushroomTemplateCardEditor
             },
             {
               name: "icon_animation",
-              selector: { boolean: {} },
+              selector: { template: {} },
             },
           ],
         },
