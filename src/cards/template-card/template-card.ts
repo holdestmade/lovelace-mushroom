@@ -64,6 +64,7 @@ const TEMPLATE_KEYS = [
   "badge_icon",
   "badge_color",
   "badge_text",
+  "icon_animation",
 ] as const;
 
 type TemplateKey = (typeof TEMPLATE_KEYS)[number];
@@ -394,6 +395,11 @@ export class MushroomTemplateCard extends LitElement implements LovelaceCard {
 
     const weatherSvg = getWeatherSvgIcon(icon);
 
+    const iconAnimationValue = this.getValue("icon_animation");
+    const isAnimating =
+      !!iconAnimationValue &&
+      !["false", "off", "0", "no"].includes(iconAnimationValue.toLowerCase());
+
     const style = {
       "--tile-color": cssColor,
     };
@@ -467,7 +473,7 @@ export class MushroomTemplateCard extends LitElement implements LovelaceCard {
                           : undefined}
                         class=${classMap({
                           weather: Boolean(weatherSvg),
-                          spin: Boolean(this._config?.icon_animation),
+                          spin: isAnimating,
                         })}
                       >
                         ${picture
